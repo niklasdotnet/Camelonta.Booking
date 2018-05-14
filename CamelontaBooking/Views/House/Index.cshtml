@@ -1,0 +1,33 @@
+﻿@using Camelonta.Backend.Models
+@{
+    ViewBag.Title = "Camelonta - Houses";
+}
+@model IEnumerable<Housing>
+
+<div class="jumbotron">
+    <h1>Houses</h1>
+    <p class="lead">Our houses are the best</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="panel-group">
+    <div class="container">
+        <div class="row">
+            @foreach (var housing in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h4>@housing.Name</h4></div>
+                        <div class="panel-body">
+                            <a href="@Url.Action("NewReservation", "Reservation", new {housingId = @housing.Id})">
+                                <img src="~/Images/@housing.Image" style="margin-right: 10px;" class="img-rounded" width="150" height="150" />
+                            </a>
+                            
+                            @Html.ActionLink("Book", "NewReservation", "Reservation", new { housingId = @housing.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

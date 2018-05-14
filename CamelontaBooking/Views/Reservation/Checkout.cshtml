@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+@model Camelonta.Backend.Models.Reservation
+
+<div class="panel panel-success">
+    <div class="panel-heading">Reservation saved</div>
+    <div class="panel-body">
+        @Html.Label("Reservation Number:") @Html.Label(Model.ReservationNumber)
+        @Html.Label("Price:") @Html.Label(Model.Price.ToString()) EUR
+        @Html.Label("From:") @Html.Label(Model.DateFrom.ToString("yyyy-MM-dd"))
+        @Html.Label("To:") @Html.Label(Model.DateTo.ToString("yyyy-MM-dd"))
+    </div>
+</div>
+
+
