@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
-using Camelonta.Backend.Models;
-
-namespace CamelontaBooking.Models.ViewModels
+﻿namespace CamelontaBooking.Models.ViewModels
 {
     public class ReservationViewModel
     {

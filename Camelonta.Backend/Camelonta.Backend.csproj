@@ -73,8 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Infrastructure\GlobalSettings.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Housing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

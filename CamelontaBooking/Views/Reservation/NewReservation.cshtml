@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "New Reservation";
 }
 @model CamelontaBooking.Models.ViewModels.ReservationViewModel
@@ -7,10 +6,22 @@
 {
     <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.datepicker').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
+        $(document).ready(function() {
+            function calcPrice() {
+                $('#DateFrom, #DateTo').parent().removeClass('has-error');
+                var from = new Date($('#DateFrom').val()).setHours(0, 0, 0, 0);
+                var to = new Date($('#DateTo').val()).setHours(0, 0, 0, 0);
+                var now = new Date().setHours(0, 0, 0, 0);
+                var hasError = false;
+                if (from < now) { $('#DateFrom').parent().addClass('has-error'); hasError = true; }
+                if (to < from) { $('#DateTo').parent().addClass('has-error'); hasError = true; }
+                if (hasError) return;
+
+                $('#price').val('');
+                $.get("/Reservation/GetPrice", { housingId: $('#HousingId').val(), dateFrom: $('#DateFrom').val(), dateTo: $('#DateTo').val() }, function(response) { $("#price").val(response); });
+            }
+            $('.datepicker').datetimepicker({ format: 'YYYY-MM-DD' }).on('dp.change', function () { calcPrice(); });
+            $(document).ready(function () { calcPrice() });
         });
     </script>
 }
@@ -43,10 +54,13 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         @Html.TextBoxFor(m => m.PersonalNumber, new { @class = "form-control", placeholder = "Personal Number" })
                     </div>
-
+                    <div class="input-group">
+                        <span class="input-group-addon">Price</span>
+                        <input id="price" type="text" class="form-control" name="price" placeholder="" readonly>
+                    </div>
                     <div>
                         @Html.HiddenFor(m => m.HousingId)
-                        <input type="submit" class="btn btn-default" value="Create reservation" />
+                        <input id="submit" type="submit" class="btn btn-default" value="Create reservation" />
                     </div>
 
                 }

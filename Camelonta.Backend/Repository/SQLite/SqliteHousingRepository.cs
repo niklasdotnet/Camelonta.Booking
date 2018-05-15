@@ -30,7 +30,7 @@ namespace Camelonta.Backend.Repository.SQLite
                         Id = (long)reader["Id"],
                         Name = reader["Name"].ToString(),
                         BaseDayFee = (long)reader["BaseDayFee"],
-                        DayFactorPrice = (decimal)reader["DayPriceFactor"],
+                        DayPriceFactor = (decimal)reader["DayPriceFactor"],
                         Image = reader["Image"].ToString()
                     };
 
@@ -63,7 +63,7 @@ namespace Camelonta.Backend.Repository.SQLite
                     Id = (long)reader["Id"],
                     Name = reader["Name"].ToString(),
                     BaseDayFee = (long)reader["BaseDayFee"],
-                    DayFactorPrice = (decimal)reader["DayPriceFactor"],
+                    DayPriceFactor = (decimal)reader["DayPriceFactor"],
                     Image = reader["Image"].ToString()
                 };
 

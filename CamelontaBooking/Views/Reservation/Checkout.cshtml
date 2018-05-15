@@ -4,13 +4,37 @@
 }
 @model Camelonta.Backend.Models.Reservation
 
+<h3>Checkout</h3>
+
 <div class="panel panel-success">
     <div class="panel-heading">Reservation saved</div>
     <div class="panel-body">
-        @Html.Label("Reservation Number:") @Html.Label(Model.ReservationNumber)
-        @Html.Label("Price:") @Html.Label(Model.Price.ToString()) EUR
-        @Html.Label("From:") @Html.Label(Model.DateFrom.ToString("yyyy-MM-dd"))
-        @Html.Label("To:") @Html.Label(Model.DateTo.ToString("yyyy-MM-dd"))
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Reservation Number:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">@Model.ReservationNumber</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Price:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">@Model.Price.ToString()</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">From:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">@Model.DateFrom.ToString("yyyy-MM-dd")</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">To:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">@Model.DateTo.ToString("yyyy-MM-dd")</p>
+                </div>
+            </div>
+        </form> 
     </div>
 </div>
 

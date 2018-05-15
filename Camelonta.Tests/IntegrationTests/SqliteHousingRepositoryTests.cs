@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Camelonta.Backend.Infrastructure;
+﻿using System.Linq;
 using NUnit.Framework;
 using Camelonta.Backend.Repository.SQLite;
 using FluentAssertions;
@@ -11,19 +8,19 @@ namespace Camelonta.Tests.IntegrationTests
     [TestFixture]
     public class SqliteHousingRepositoryTests
     {
-        private string _connectionString { get; set; }
+        private string ConnectionString { get; set; }
 
         [OneTimeSetUp]
         public void Setup()
         {
-            _connectionString = $"URI=file:{TestContext.CurrentContext.TestDirectory}\\Database\\Camelonta.Data.sqlite";           
+            ConnectionString = $"URI=file:{TestContext.CurrentContext.TestDirectory}\\Database\\Camelonta.Data.sqlite";           
         }
 
         [Test]
         public void ShouldGetAtLeastOneHousing()
         {
             //Arrange
-            var repo = new SqliteHousingRepository(_connectionString);
+            var repo = new SqliteHousingRepository(ConnectionString);
 
             //Act
             var housings = repo.GetHousings();
@@ -37,7 +34,7 @@ namespace Camelonta.Tests.IntegrationTests
         public void ShouldGetHousingById()
         {
             //Arrange
-            var repo = new SqliteHousingRepository(_connectionString);
+            var repo = new SqliteHousingRepository(ConnectionString);
 
             //Act
             var housing = repo.GetHousingById(1);

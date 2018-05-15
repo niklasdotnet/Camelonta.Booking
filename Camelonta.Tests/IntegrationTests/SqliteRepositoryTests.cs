@@ -7,12 +7,12 @@ namespace Camelonta.Tests.IntegrationTests
     [TestFixture]
     class SqliteRepositoryTests
     {
-        private string _connectionString { get; set; }
+        private string ConnectionString { get; set; }
 
         [OneTimeSetUp]
         public void Setup()
         {
-            _connectionString = $"URI=file:{TestContext.CurrentContext.TestDirectory}\\Database\\Camelonta.Data.sqlite";
+            ConnectionString = $"URI=file:{TestContext.CurrentContext.TestDirectory}\\Database\\Camelonta.Data.sqlite";
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Camelonta.Tests.IntegrationTests
             var dbPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Database", "Camelonta.Data.sqlite");
 
             //Act
-            var exists = System.IO.File.Exists(dbPath);
+            var exists = File.Exists(dbPath);
 
             //Assert
             exists.Should().BeTrue();

@@ -1,4 +1,5 @@
-﻿using Camelonta.Backend.Models;
+﻿using System;
+using Camelonta.Backend.Models;
 
 namespace Camelonta.Backend.Repository
 {
@@ -6,5 +7,6 @@ namespace Camelonta.Backend.Repository
     {
         int CreateReservation(Reservation model);
         Reservation GetReservation(long id);
+        decimal GetPrice(long housingId, DateTime dateFrom, DateTime dateTo);
     }
 }

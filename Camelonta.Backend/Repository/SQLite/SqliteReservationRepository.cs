@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Text.RegularExpressions;
 using Camelonta.Backend.Models;
 
 namespace Camelonta.Backend.Repository.SQLite
@@ -24,7 +23,7 @@ namespace Camelonta.Backend.Repository.SQLite
             var housing = housingRepo.GetHousingById(model.HousingId);
 
             var numberOfDays = model.DateTo.Subtract(model.DateFrom).Days;
-            var price = housing.BaseDayFee * numberOfDays * housing.DayFactorPrice;
+            var price = housing.BaseDayFee * numberOfDays * housing.DayPriceFactor;
 
             model.ReservationNumber = Guid.NewGuid().ToString().ToUpper().Substring(0, 5);
             
@@ -78,6 +77,31 @@ namespace Camelonta.Backend.Repository.SQLite
                 reader.Dispose();
 
                 return reservation;
+            }
+        }
+
+        public decimal GetPrice(long housingId, DateTime dateFrom, DateTime dateTo)
+        {
+            var sqlQuery = $"SELECT [BaseDayFee], [DayPriceFactor] FROM [Housing] WHERE [Id] = {housingId}";
+
+            using (var connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Open();
+                SQLiteDataReader reader;
+                using (var command = new SQLiteCommand(sqlQuery, connection))
+                {
+                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                }
+
+                if (!reader.Read()) return -1;
+                var baseDayFee = (long) reader["BaseDayFee"];
+                var dayPriceFactor = (decimal) reader["DayPriceFactor"];
+                var numberOfDays = dateTo.Subtract(dateFrom).Days;
+
+                reader.Close();
+                reader.Dispose();
+                
+                return baseDayFee * numberOfDays * dayPriceFactor;
             }
         }
     }

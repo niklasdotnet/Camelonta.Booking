@@ -16,12 +16,15 @@ namespace CamelontaBooking.Controllers
             _reservationRepository = reservationRepository;
             _housingRepository = housingRepository;
         }
-        
+
         [HttpGet]
         [Route("NewReservation")]
-        public ActionResult NewReservation(int housingId)
+        [Route("Reservation/NewReservation")]
+        public ActionResult NewReservation(long? housingId)
         {
-            var housing = _housingRepository.GetHousingById(housingId);
+            if (housingId == null) return RedirectToAction("Index", "House");
+
+            var housing = _housingRepository.GetHousingById((long)housingId);
 
             var viewModel = new ReservationViewModel
             {
@@ -32,11 +35,9 @@ namespace CamelontaBooking.Controllers
                 DateTo = DateTime.Now.AddDays(7).ToString("yyyy-MM-dd")
             };
 
-            // Auto fill for convenience
-
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [Route("CreateReservation")]
         public ActionResult CreateReservation(ReservationViewModel model)
@@ -49,8 +50,8 @@ namespace CamelontaBooking.Controllers
                 DateTo = DateTime.Parse(model.DateTo)
             };
             var reservationId = _reservationRepository.CreateReservation(newReservation);
-            
-            return RedirectToAction("Checkout", "Reservation", new { id = reservationId});
+
+            return RedirectToAction("Checkout", "Reservation", new { id = reservationId });
             //return View("ViewReservation", reservation);
         }
 
@@ -63,6 +64,12 @@ namespace CamelontaBooking.Controllers
             var model = _reservationRepository.GetReservation(id);
             return View(model);
         }
-        
+
+        [HttpGet]
+        [Route("Reservation/GetPrice")]
+        public decimal GetPrice(long housingId, DateTime dateFrom, DateTime dateTo)
+        {
+            return _reservationRepository.GetPrice(housingId, dateFrom, dateTo);
+        }
     }
 }
