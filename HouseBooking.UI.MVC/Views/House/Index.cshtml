@@ -1,0 +1,34 @@
+﻿@using HouseBooking.Backend.Models
+@{
+    ViewBag.Title = "HouseBooking - Accommodations";
+}
+@model IEnumerable<Housing>
+
+<div class="jumbotron">
+    <h1>House Booking</h1>
+    <p class="lead">Our houses are the best on the market according to studies*.</p>
+    <p style="font-size:6pt;">*Made by us.</p>
+    <p><a href="#" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<h2>Accommodations</h2>
+<div class="panel-group">
+    <div class="container">
+        <div class="row">
+            @foreach (var housing in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h4>@housing.Name</h4></div>
+                        <div class="panel-body">
+                            <a href="@Url.Action("NewReservation", "Reservation", new {housingId = @housing.Id})">
+                                <img src="~/Images/@housing.Image" alt="@housing.Name" style="margin-right: 10px;" class="img-rounded" width="150" height="150" />
+                            </a>
+                            
+                            @Html.ActionLink("Book", "NewReservation", "Reservation", new { housingId = @housing.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
