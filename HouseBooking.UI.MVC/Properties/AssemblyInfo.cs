@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Niklas Nyfalk")]
-[assembly: AssemblyProduct("HouseBooking")]
+[assembly: AssemblyProduct("HouseBooking.MVC")]
 [assembly: AssemblyCopyright("Copyright © Niklas Nyfalk 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
