@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("HouseBooking.Backend")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Niklas Nyfalk")]
 [assembly: AssemblyProduct("HouseBooking.Backend")]
-[assembly: AssemblyCopyright("Copyright © Niklas Nyfalk2018")]
+[assembly: AssemblyCopyright("Copyright © Niklas Nyfalk 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
